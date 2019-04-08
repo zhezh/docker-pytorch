@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     libx11-6 \
     apt-transport-https \
     wget \
+    openssh-server \
  && rm -rf /var/lib/apt/lists/*
 
 RUN wget -qO - https://archive.cloudera.com/cdh6/6.2.0/ubuntu1604/apt/archive.key | apt-key add - \
