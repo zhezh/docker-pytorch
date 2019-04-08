@@ -8,7 +8,15 @@ RUN apt-get update && apt-get install -y \
     git \
     bzip2 \
     libx11-6 \
+    apt-transport-https \
+    wget \
  && rm -rf /var/lib/apt/lists/*
+
+RUN wget -qO - https://archive.cloudera.com/cdh6/6.2.0/ubuntu1604/apt/archive.key | apt-key add - \
+    && echo "deb https://archive.cloudera.com/cdh6/6.2.0/ubuntu1604/apt/ xenial-cdh6.2.0  contrib" >> /etc/apt/sources.list.d/cloudera-repo.list \
+    && apt-get update && apt-get install -y \
+    hadoop-hdfs-fuse \
+  && rm -rf /var/lib/apt/lists/*
 
 # Create a working directory
 RUN mkdir /app
