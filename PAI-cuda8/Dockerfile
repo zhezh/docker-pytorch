@@ -26,7 +26,7 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN wget -qO- http://archive.apache.org/dist/hadoop/common/hadoop-HADOOPVERSION/hadoop-{HADOOP_VERSION}.tar.gz | \
+RUN wget -qO- http://archive.apache.org/dist/hadoop/common/hadoop-{HADOOP_VERSION}/hadoop-{HADOOP_VERSION}.tar.gz | \
     tar xz -C /usr/local && \
     mv /usr/local/hadoop-${HADOOP_VERSION} /usr/local/hadoop
 
@@ -150,3 +150,5 @@ RUN conda install -y -c menpo opencv3=3.1.0 \
 
 # Set the default command to python3
 CMD ["python3"]
+
+USER root
