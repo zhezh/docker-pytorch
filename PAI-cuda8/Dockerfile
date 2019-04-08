@@ -49,7 +49,7 @@ WORKDIR /root
 RUN apt-get -y update && \
     apt-get -y install git \
         fuse \
-        golang \
+        golang-1.9 \
         libjasper1 \
         libjpeg8 \
         libpng12-0 \
