@@ -26,7 +26,7 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN wget -qO- http://archive.apache.org/dist/hadoop/common/hadoop-{HADOOP_VERSION}/hadoop-{HADOOP_VERSION}.tar.gz | \
+RUN wget -qO- https://archive.apache.org/dist/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz | \
     tar xz -C /usr/local && \
     mv /usr/local/hadoop-${HADOOP_VERSION} /usr/local/hadoop
 
