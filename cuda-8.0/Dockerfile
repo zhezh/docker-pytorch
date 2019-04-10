@@ -88,5 +88,15 @@ RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends \
 RUN conda install -y -c menpo opencv3=3.1.0 \
  && conda clean -ya
 
+RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends \
+    kmod \
+    linux-image-4.13.0-36-generic \
+  && sudo rm -rf /var/lib/apt/lists/*
+#RUN sh -c "echo '/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server' >> /etc/ld.so.conf" 
+#  && /sbin/ldconfig
+ENV LD_LIBRARY_PATH=/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server:$LD_LIBRARY_PATH
+
+
 # Set the default command to python3
 CMD ["python3"]
+USER root
