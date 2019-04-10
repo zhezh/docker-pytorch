@@ -57,11 +57,15 @@ RUN apt-get -y update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN wget -c https://storage.googleapis.com/golang/go1.7.3.linux-amd64.tar.gz && \
+    tar -C /usr/local -xvzf go1.7.3.linux-amd64.tar.gz
+
+ENV PATH=/usr/local/go/bin:$PATH
+
 # Install hdfs-mount
 RUN git clone --recursive https://github.com/Microsoft/hdfs-mount.git && \
     cd hdfs-mount && \
     make -j $(nproc) && \
-    make test && \
     cp hdfs-mount /bin && \
     cd .. && \
     rm -rf hdfs-mount
