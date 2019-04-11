@@ -152,6 +152,12 @@ RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends \
 RUN conda install -y -c menpo opencv3=3.1.0 \
  && conda clean -ya
 
+RUN curl -so ~/packages-microsoft-prod.deb  https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb \
+  && sudo dpkg -i ~/packages-microsoft-prod.deb \
+  && sudo apt-get update \
+  && sudo apt-get install -y blobfuse fuse vim \
+  && sudo rm -rf /var/lib/apt/lists/* 
+
 # Set the default command to python3
 CMD ["python3"]
 
