@@ -158,6 +158,8 @@ RUN curl -so ~/packages-microsoft-prod.deb  https://packages.microsoft.com/confi
   && sudo apt-get install -y blobfuse fuse vim \
   && sudo rm -rf /var/lib/apt/lists/* 
 
+ENV PATH=/home/user/.local/bin:$PATH
+
 # Set the default command to python3
 CMD ["python3"]
 
