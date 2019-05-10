@@ -1,7 +1,7 @@
-FROM nvidia/cuda:8.0-cudnn7-runtime-ubuntu16.04
+FROM nvidia/cuda:8.0-cudnn7-devel
 
-ENV HADOOP_VERSION=2.7.2
-LABEL HADOOP_VERSION=2.7.2
+ENV HADOOP_VERSION=3.2.0
+LABEL HADOOP_VERSION=3.2.0
 
 RUN DEBIAN_FRONTEND=noninteractive && \
     apt-get -y update && \
@@ -26,7 +26,7 @@ RUN DEBIAN_FRONTEND=noninteractive && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN wget -qO- https://archive.apache.org/dist/hadoop/common/hadoop-2.7.2/hadoop-2.7.2.tar.gz | \
+RUN wget -qO- https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz | \
     tar xz -C /usr/local && \
     mv /usr/local/hadoop-${HADOOP_VERSION} /usr/local/hadoop
 
@@ -41,7 +41,7 @@ ENV HADOOP_PREFIX=${HADOOP_INSTALL} \
     HADOOP_COMMON_LIB_NATIVE_DIR=${HADOOP_INSTALL}/lib/native \
     HADOOP_OPTS="-Djava.library.path=${HADOOP_INSTALL}/lib/native"
 
-ENV PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:HADOOPBINDIR:{HADOOP_SBIN_DIR} \
+ENV PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:HADOOPBINDIR:${HADOOP_SBIN_DIR} \
     LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib:/usr/local/cuda/extras/CUPTI/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/lib64:/usr/local/cuda/targets/x86_64-linux/lib/stubs:${JAVA_HOME}/jre/lib/amd64/server
 
 WORKDIR /root
