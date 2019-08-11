@@ -107,9 +107,9 @@ ENV CONDA_AUTO_UPDATE_CONDA=false
 
 # Create a Python 3.6 environment
 RUN /home/user/miniconda/bin/conda install conda-build \
- && /home/user/miniconda/bin/conda create -y --name py37 python=3.7 \
+ && /home/user/miniconda/bin/conda create -y --name py36 python=3.6.5 \
  && /home/user/miniconda/bin/conda clean -ya
-ENV CONDA_DEFAULT_ENV=py37
+ENV CONDA_DEFAULT_ENV=py36
 ENV CONDA_PREFIX=/home/user/miniconda/envs/$CONDA_DEFAULT_ENV
 ENV PATH=$CONDA_PREFIX/bin:$PATH
 
@@ -117,7 +117,7 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 RUN conda install -y -c pytorch \
     cuda92=1.0 \
     magma-cuda92=2.5.1 \
-    "pytorch=1.2.0=py3.7_cuda9.2.148_cudnn7.6.2_0" \
+    "pytorch=1.2.0=py3.6_cuda9.2.148_cudnn7.6.2_0" \
     torchvision=0.4.0 \
  && conda clean -ya
 
@@ -148,6 +148,7 @@ RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends \
     python-opencv \
     sysstat \
     htop \
+    libgeos-dev \
  && sudo rm -rf /var/lib/apt/lists/*
 # RUN conda install -y -c menpo opencv3=3.1.0 \
 RUN conda install -y -c anaconda opencv \
